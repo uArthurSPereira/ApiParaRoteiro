@@ -11,16 +11,14 @@ namespace ApiParaRoteiro.Controllers
     [Route("[controller]")]
     public class FilmeController : ControllerBase
     {
-        
+        DataBase.FilmeDatabase filmeDB = new DataBase.FilmeDatabase();
+        Business.FilmeBusiness filmeBusiness = new Business.FilmeBusiness();
+
         [HttpPost]
         public Models.TbFilme Salvar(Models.TbFilme filme)
         {
-            Models.apidbContext ctx =new Models.apidbContext();
-            ctx.TbFilme.Add(filme);
-
-            ctx.SaveChanges();
-
-            return filme;
+            Models.TbFilme f = filmeBusiness.Salvar(filme);
+            return f;
         }
 
         [HttpGet]
